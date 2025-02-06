@@ -1,11 +1,14 @@
 import gtts
 import os
 import tkinter as tk
+from tkinter import ttk
 def con():
+    la=['en','nl','es','fr','de','hi']
     fn=n.get()
+    langind=v.index(str(l.get()))
     with open(fn,'r') as f:
         text=f.read()
-        lang=str(l.get())
+        lang=la[langind]
         aud=gtts.gTTS(text=text,lang=lang,slow=False)
         aud.save("Sample.mp3")
         os.system("Sample.mp3")
@@ -21,13 +24,17 @@ root.iconphoto(False,i)
 tk.Label(root,text='Text to audio convertion',height=2,width=100,font=('Times New Roman',18,'underline','italic'),bg="#fff0f3",bd=3).pack(pady=2)
 
 tk.Label(root,text='Enter file name:',font=('aeriel',12),bg="#fff0f3").place(x=2,y=55)
-tk.Label(root,text='Enter language:',font=('aeriel',12),bg="#fff0f3").place(x=2,y=100)
+tk.Label(root,text='Choose language:',font=('aeriel',12),bg="#fff0f3").place(x=2,y=100)
 
 n=tk.StringVar()
 l=tk.StringVar()
 
 e1=tk.Entry(root,textvariable=n,width=150,font=('ariel',10),bd=3).pack(pady=11,padx=3)
-e2=tk.Entry(root,textvariable=l,width=15,font=('ariel',10),bd=3).pack(pady=14,padx=(3,190))
+#e2=tk.Entry(root,textvariable=l,width=15,font=('ariel',10),bd=3).pack(pady=14,padx=(3,190))
+v=['English','Dutch','Spanish','French','German','Hindi']
+c2=ttk.Combobox(root,textvariable=l,width=12,values=v)
+c2.pack(pady=14,padx=(3,190))
+c2.current(0)
 
 im2=tk.PhotoImage(file="text.png")
 im2=im2.subsample(7,7)
